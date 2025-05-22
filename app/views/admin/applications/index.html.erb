@@ -1,0 +1,34 @@
+<h2 class="mb-4">OAuth Applications</h2>
+
+<div class="mb-3">
+  <%= link_to "New Application", new_admin_application_path, class: "btn btn-success" %>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>UID</th>
+      <th>Redirect URI</th>
+      <th>Scopes</th>
+      <th>Confidential</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @applications.each do |app| %>
+      <tr>
+        <td><%= app.name %></td>
+        <td><%= app.uid %></td>
+        <td><%= app.redirect_uri %></td>
+        <td><%= app.scopes.presence || "N/A" %></td>
+        <td><%= app.confidential? ? "Yes" : "No" %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_application_path(app), class: "btn btn-sm btn-outline-primary" %>
+          <%= link_to "Delete", admin_application_path(app), method: :delete,
+              data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

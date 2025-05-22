@@ -1,0 +1,23 @@
+<h2>Admin Dashboard</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Manage Users</h5>
+        <p class="card-text">View, edit, create, or delete users.</p>
+        <a href="<%= admin_users_path %>" class="btn btn-primary">Go to Users</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">OAuth Applications</h5>
+        <p class="card-text">Manage registered OAuth clients and their settings.</p>
+        <a href="<%= admin_applications_path %>" class="btn btn-primary">Go to Applications</a>
+      </div>
+    </div>
+  </div>
+</div>

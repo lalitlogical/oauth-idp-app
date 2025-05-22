@@ -2,8 +2,13 @@ Rails.application.routes.draw do
   use_doorkeeper
   devise_for :users
 
-  mount RailsAdmin::Engine => "/admin", as: "rails_admin"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # mount RailsAdmin::Engine => "/admin", as: "rails_admin"
+
+  namespace :admin do
+    root "dashboard#index" # default landing page
+    resources :users
+    resources :applications
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
