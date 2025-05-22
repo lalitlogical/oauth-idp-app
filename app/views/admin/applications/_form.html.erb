@@ -1,0 +1,56 @@
+<div class="container mt-5">
+  <div class="card shadow rounded-4">
+    <div class="card-body p-5">
+      <h2 class="mb-4">
+        <% if @application.new_record? %>
+          <i class="bi bi-plus-circle-fill me-2 text-primary"></i>Register a New OAuth Application
+        <% else %>
+          <i class="bi bi-pencil-square me-2 text-warning"></i>Edit OAuth Application
+        <% end %>
+      </h2>
+
+      <% if @application.errors.any? %>
+        <div class="alert alert-danger rounded-3">
+          <h5 class="mb-3">
+            <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>
+            Please fix the following errors:
+          </h5>
+          <ul class="mb-0">
+            <% @application.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form_with model: @application, url: admin_applications_path, local: true, class: "needs-validation" do |f| %>
+        <div class="mb-3">
+          <%= f.label :name, 'Application Name', class: 'form-label fw-semibold' %>
+          <%= f.text_field :name, class: 'form-control', placeholder: "e.g. My Finance App", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :redirect_uri, 'Redirect URI', class: 'form-label fw-semibold' %>
+          <%= f.text_field :redirect_uri, class: 'form-control', placeholder: "e.g. https://myapp.com/oauth/callback", required: true %>
+          <div class="form-text">OAuth server will redirect here after authentication.</div>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :scopes, 'Scopes', class: 'form-label fw-semibold' %>
+          <%= f.text_field :scopes, class: 'form-control', placeholder: "e.g. read write admin" %>
+          <div class="form-text">Optional. Space-separated list of scopes your app will request.</div>
+        </div>
+
+        <div class="form-check form-switch mb-4">
+          <%= f.check_box :confidential, class: 'form-check-input', role: 'switch', id: 'confidentialSwitch' %>
+          <%= f.label :confidential, 'Confidential Application (uses client secret)', class: 'form-check-label', for: 'confidentialSwitch' %>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <%= link_to 'Cancel', admin_applications_path, class: "btn btn-outline-secondary" %>
+          <%= f.submit @application.new_record? ? 'Register Application' : 'Update Application', class: 'btn btn-primary px-4' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

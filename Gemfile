@@ -40,6 +40,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "doorkeeper"
+gem "doorkeeper-jwt"
 gem "devise"
 gem "rails_admin", "~> 3.1"
 

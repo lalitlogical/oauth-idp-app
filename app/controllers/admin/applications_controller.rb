@@ -12,7 +12,7 @@ class Admin::ApplicationsController < Admin::BaseController
   def create
     @application = Doorkeeper::Application.new(app_params)
     if @application.save
-      redirect_to admin_application_path(@application), notice: "OAuth app created"
+      redirect_to admin_applications_path, notice: "OAuth app created"
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Admin::ApplicationsController < Admin::BaseController
   def update
     @application = Doorkeeper::Application.find(params[:id])
     if @application.update(app_params)
-      redirect_to admin_application_path(@application), notice: "Updated"
+      redirect_to admin_applications_path, notice: "Updated"
     else
       render :edit
     end
