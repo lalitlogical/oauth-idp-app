@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :access_tokens, class_name: "Doorkeeper::AccessToken", foreign_key: :resource_owner_id
+  has_many :access_tokens, class_name: "Doorkeeper::AccessToken", foreign_key: :resource_owner_id, dependent: :destroy
 
   # Optional helper method for distinct apps
   def authorized_applications
