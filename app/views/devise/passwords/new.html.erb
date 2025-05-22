@@ -1,16 +1,33 @@
-<h2>Forgot your password?</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow rounded">
+        <div class="card-header text-center bg-warning text-dark">
+          <h4>Forgot your password?</h4>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-4 text-center">
+            No worries! Enter your email and we’ll send you a password reset link.
+          </p>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <div class="mb-3">
+              <%= f.label :email %>
+              <%= f.email_field :email, autofocus: true, class: "form-control", required: true %>
+            </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="d-grid">
+              <%= f.submit "Send me reset instructions", class: "btn btn-warning" %>
+            </div>
+          <% end %>
+
+          <hr>
+
+          <div class="text-center">
+            <%= link_to "Back to sign in", new_session_path(resource_name), class: "btn btn-outline-secondary mt-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
