@@ -67,6 +67,6 @@ end
 gem "cssbundling-rails"
 gem "sprockets-rails"
 gem "sassc-rails"
-gem "cssbundling-rails"
 
 gem "bootstrap", "~> 5.3"
+gem "byebug"
