@@ -18,11 +18,16 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag 'rails_admin', media: 'all' %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+    <nav>
+      <%= link_to 'Home', root_path %> |
+      <%= link_to 'Admin', rails_admin_path %>
+    </nav>
     <%= yield %>
   </body>
 </html>
