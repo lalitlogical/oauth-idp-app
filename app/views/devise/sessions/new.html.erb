@@ -7,6 +7,12 @@
         </div>
         <div class="card-body">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <% if flash[:alert] %>
+              <div class="alert alert-danger" role="alert">
+                <%= flash[:alert] %>
+              </div>
+            <% end %>
+
             <div class="mb-3">
               <%= f.label :email, class: "form-label" %>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>

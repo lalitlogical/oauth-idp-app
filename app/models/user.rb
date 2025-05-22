@@ -8,8 +8,6 @@ class User < ApplicationRecord
 
   # Optional helper method for distinct apps
   def authorized_applications
-    Doorkeeper::Application.joins(:access_tokens)
-      .where(access_tokens: { application_id: id })
-      .distinct
+    Doorkeeper::Application.where(id: access_tokens.select("distinct application_id"))
   end
 end
