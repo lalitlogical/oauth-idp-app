@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   namespace :oauth do
     get "/userinfo", to: "userinfo#show"
+    get "/jwks", to: "jwks#show"
   end
+
+  get "/.well-known/openid-configuration", to: "well_known#openid_configuration"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

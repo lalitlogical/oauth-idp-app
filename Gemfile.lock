@@ -453,8 +453,10 @@ DEPENDENCIES
   devise
   doorkeeper
   doorkeeper-jwt
+  dotenv
   importmap-rails
   jbuilder
+  jwt
   kamal
   puma (>= 5.0)
   rails (~> 7.1.3)
