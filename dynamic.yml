@@ -1,16 +1,24 @@
 http:
+  middlewares:
+    compress:
+      compress: {}
+
   routers:
     idp-router:
       rule: "Host(`idp.myapp.local`)"
       service: idp-service
       entryPoints:
         - web
+      middlewares:
+        - compress
 
     client-router:
       rule: "Host(`client.myapp.local`)"
       service: client-service
       entryPoints:
         - web
+      middlewares:
+        - compress
 
   services:
     idp-service:
