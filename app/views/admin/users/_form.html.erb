@@ -1,0 +1,79 @@
+<div class="container mt-5">
+    <div class="card shadow-sm rounded-4">
+    <div class="card-body p-4">
+        <h2 class="mb-4">
+            <% if @user.new_record? %>
+                <i class="bi bi-plus-circle-fill me-2 text-primary"></i>Register a New User
+            <% else %>
+                <i class="bi bi-pencil-square me-2 text-warning"></i>Edit User
+            <% end %>
+        </h2>
+
+        <% if @user.errors.any? %>
+            <div class="alert alert-danger rounded-3">
+            <h5 class="mb-3">
+                <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>
+                Please fix the following errors:
+            </h5>
+            <ul class="mb-0">
+                <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
+
+        <%= form_with model: @user, url: admin_users_path, local: true, class: "needs-validation" do |f| %>
+        <div class="mb-4">
+            <%= f.label :name, class: "form-label fw-semibold" %>
+            <%= f.text_field :name, class: "form-control #{'is-invalid' if @user.errors[:name].any?}" %>
+            <% @user.errors.full_messages_for(:name).each do |msg| %>
+            <div class="invalid-feedback d-block"><%= msg %></div>
+            <% end %>
+        </div>
+
+        <div class="mb-4">
+            <%= f.label :display_name, class: "form-label fw-semibold" %>
+            <%= f.text_field :display_name, class: "form-control #{'is-invalid' if @user.errors[:display_name].any?}" %>
+            <% @user.errors.full_messages_for(:display_name).each do |msg| %>
+            <div class="invalid-feedback d-block"><%= msg %></div>
+            <% end %>
+        </div>
+
+        <div class="mb-4">
+            <%= f.label :username, class: "form-label fw-semibold" %>
+            <%= f.text_field :username, class: "form-control #{'is-invalid' if @user.errors[:username].any?}" %>
+            <% @user.errors.full_messages_for(:username).each do |msg| %>
+            <div class="invalid-feedback d-block"><%= msg %></div>
+            <% end %>
+        </div>
+
+        <div class="mb-4">
+            <%= f.label :email, class: "form-label fw-semibold" %>
+            <%= f.email_field :email, class: "form-control #{'is-invalid' if @user.errors[:email].any?}" %>
+            <% @user.errors.full_messages_for(:email).each do |msg| %>
+            <div class="invalid-feedback d-block"><%= msg %></div>
+            <% end %>
+        </div>
+
+        <div class="mb-4">
+            <%= f.label :password, class: "form-label fw-semibold" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control #{'is-invalid' if @user.errors[:password].any?}" %>
+            <% @user.errors.full_messages_for(:password).each do |msg| %>
+            <div class="invalid-feedback d-block"><%= msg %></div>
+            <% end %>
+            <% if @user.persisted? %>
+            <small class="form-text text-muted">Leave blank to keep current password</small>
+            <% end %>
+        </div>
+
+        <%# Add more fields if needed %>
+
+        <div class="d-flex justify-content-between pt-3 border-top mt-4">
+            <%= link_to "Cancel", admin_users_path, class: "btn btn-outline-secondary rounded-pill px-4" %>
+            <%= f.submit(@user.new_record? ? "Create User" : "Update User", class: "btn btn-primary rounded-pill px-4") %>
+        </div>
+        <% end %>
+    </div>
+    </div>
+</div>
