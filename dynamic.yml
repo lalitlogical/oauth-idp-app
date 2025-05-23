@@ -1,0 +1,26 @@
+http:
+  routers:
+    idp-router:
+      rule: "Host(`idp.myapp.local`)"
+      service: idp-service
+      entryPoints:
+        - web
+
+    client-router:
+      rule: "Host(`client.myapp.local`)"
+      service: client-service
+      entryPoints:
+        - web
+
+  services:
+    idp-service:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://host.docker.internal:3000"
+
+    client-service:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://host.docker.internal:3001"

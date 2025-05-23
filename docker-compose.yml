@@ -1,0 +1,9 @@
+services:
+  traefik:
+    image: traefik:v2.10
+    ports:
+      - "80:80"
+      - "8080:8080" # optional: for Traefik dashboard
+    volumes:
+      - "./traefik.yml:/etc/traefik/traefik.yml"
+      - "./dynamic.yml:/etc/traefik/dynamic.yml"
