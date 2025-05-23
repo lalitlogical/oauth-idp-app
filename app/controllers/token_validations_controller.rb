@@ -19,7 +19,7 @@ class TokenValidationsController < ApplicationController
           algorithm: "RS256",
           iss: "#{ENV["IDP_HOST"]}/",
           verify_iss: true,
-          aud: "m2m-client-id",
+          aud: request.headers["audience"],
           verify_aud: true
         }
       )

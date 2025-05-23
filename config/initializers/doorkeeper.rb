@@ -246,8 +246,8 @@ Doorkeeper.configure do
   # For more information go to
   # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
   #
-  default_scopes :public
-  optional_scopes :read, :write, :admin
+  default_scopes  :openid, :profile
+  optional_scopes :email, :records, :read_data, :write_data, :admin
 
   # Allows to restrict only certain scopes for grant_type.
   # By default, all the scopes will be available for all the grant types.
@@ -313,7 +313,7 @@ Doorkeeper.configure do
   # Or you can define your custom check:
   #
   allow_blank_redirect_uri do |grant_flows, client|
-    client.scopes.to_a.include?("admin")
+    (client.scopes.to_a & [ "read_data", "write_data", "admin" ]).present?
   end
 
   # Specify how authorization errors should be handled.
@@ -466,9 +466,8 @@ Doorkeeper.configure do
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
   # For example if dealing with a trusted application.
-  #
   skip_authorization do |resource_owner, client|
-    client.scopes.to_a.include?("admin")
+    (client.scopes.to_a & [ "read_data", "write_data", "admin" ]).present?
   end
 
   # Configure custom constraints for the Token Introspection request.
