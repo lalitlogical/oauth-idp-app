@@ -1,4 +1,31 @@
 services:
+  db:
+    image: postgres:15
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"
+    volumes:
+      - .:/myapp
+      - ./config/keys:/myapp/config/keys:ro
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DB_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: oauth_idp
+      KAFKA_BROKERS: kafka:9092
+    depends_on:
+      - db
+      - kafka
+
   traefik:
     image: traefik:v2.10
     ports:
@@ -21,7 +48,14 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://host.docker.internal:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
+
+volumes:
+  db-data:
+
+# Useful Commands
+# docker-compose run web bundle exec rake db:drop db:create db:migrate db:seed
+# docker-compose run web bundle exec rails c

@@ -2,7 +2,8 @@ require "kafka"
 
 class KafkaProducer
   def initialize(topic = "doorkeeper-events")
-    @kafka = Kafka.new([ "localhost:9092" ])
+    brokers = ENV.fetch("KAFKA_BROKERS", "localhost:9092")
+    @kafka = Kafka.new(brokers.split(","))
     @topic = topic
   end
 
