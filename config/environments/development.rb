@@ -73,4 +73,5 @@ Rails.application.configure do
   config.assets.enabled = true
 
   config.hosts << "idp.myapp.local"
+  config.hosts << "host.docker.internal:3000"
 end
