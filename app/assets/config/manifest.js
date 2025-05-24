@@ -5,3 +5,4 @@
 //= link controllers/index.js
 //= link application.css
 //= link_tree ../builds
+//= link doorkeeper/application.css
