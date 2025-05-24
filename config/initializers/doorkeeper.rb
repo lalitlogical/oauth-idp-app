@@ -313,7 +313,7 @@ Doorkeeper.configure do
   # Or you can define your custom check:
   #
   allow_blank_redirect_uri do |grant_flows, client|
-    (client.scopes.to_a & [ "read_data", "write_data", "admin" ]).present?
+    client.confidential
   end
 
   # Specify how authorization errors should be handled.
@@ -467,7 +467,7 @@ Doorkeeper.configure do
   # so that the user skips the authorization step.
   # For example if dealing with a trusted application.
   skip_authorization do |resource_owner, client|
-    (client.scopes.to_a & [ "read_data", "write_data", "admin" ]).present?
+    client.confidential
   end
 
   # Configure custom constraints for the Token Introspection request.

@@ -23,7 +23,7 @@
         </div>
       <% end %>
 
-      <%= form_with model: @application, url: admin_applications_path, local: true, class: "needs-validation" do |f| %>
+      <%= form_with model: @application, url: @application.new_record? ? admin_applications_path : admin_application_path(@application), local: true, class: "needs-validation" do |f| %>
         <div class="mb-3">
           <%= f.label :name, 'Application Name', class: 'form-label fw-semibold' %>
           <%= f.text_field :name, class: 'form-control', placeholder: "e.g. My Finance App", required: true %>
@@ -31,7 +31,7 @@
 
         <div class="mb-3">
           <%= f.label :redirect_uri, 'Redirect URI', class: 'form-label fw-semibold' %>
-          <%= f.text_field :redirect_uri, class: 'form-control', placeholder: "e.g. https://myapp.com/oauth/callback", required: true %>
+          <%= f.text_field :redirect_uri, class: 'form-control', placeholder: "e.g. https://myapp.com/oauth/callback" %>
           <div class="form-text">OAuth server will redirect here after authentication.</div>
         </div>
 
