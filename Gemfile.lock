@@ -126,6 +126,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    digest-crc (0.7.0)
+      rake (>= 12.0.0, < 14.0.0)
     doorkeeper (5.8.2)
       railties (>= 5)
     doorkeeper-jwt (0.4.2)
@@ -342,6 +344,8 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
+    ruby-kafka (1.5.0)
+      digest-crc
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
     sassc (2.4.0)
@@ -462,6 +466,7 @@ DEPENDENCIES
   rails (~> 7.1.3)
   rails_admin (~> 3.1)
   rubocop-rails-omakase
+  ruby-kafka
   sassc-rails
   selenium-webdriver
   solid_cable

@@ -73,3 +73,4 @@ gem "sassc-rails"
 
 gem "bootstrap", "~> 5.3"
 gem "byebug"
+gem "ruby-kafka"

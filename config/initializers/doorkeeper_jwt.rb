@@ -23,5 +23,5 @@ Doorkeeper::JWT.configure do
   end
 
   secret_key Rails.application.config.x.jwt_private_key
-  encryption_method :rs256
+  signing_method :rs256
 end

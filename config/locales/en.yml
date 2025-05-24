@@ -29,3 +29,6 @@
 
 en:
   hello: "Hello world"
+  devise:
+    failure:
+      inactive_account: 'Your account has been deactivated. Please contact support.'
