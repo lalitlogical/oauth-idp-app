@@ -24,5 +24,9 @@ module OauthIdpApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.hosts << "idp.myapp.local"
+    config.hosts << "accounts.lalit.local"
+    config.hosts << "host.docker.internal:3000"
+    config.hosts << "oauth-idp-service"
   end
 end

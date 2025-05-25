@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth-client-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth-client-app
+  template:
+    metadata:
+      labels:
+        app: oauth-client-app
+    spec:
+      containers:
+        - name: oauth-client-app
+          image: oauth-client-app:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: client-app-secrets

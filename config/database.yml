@@ -88,4 +88,16 @@ staging:
 
 production:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] %>
+  database: <%= ENV['DB_DATABASE'] %>_production
+
+cable:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] %>_cable
+
+queue:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] %>_queue
+
+cache:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] %>_cache
