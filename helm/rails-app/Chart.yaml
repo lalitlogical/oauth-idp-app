@@ -1,0 +1,21 @@
+apiVersion: v2
+name: rails-app
+description: Helm chart for Rails applications
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
+# Install postgresql
+# helm install pgsql bitnami/postgresql \
+#   --set auth.database=oauth_client_development \
+#   --set auth.username=postgres \
+#   --set auth.password=postgres \
+#   --set primary.service.port=5432 \
+#   --set primary.persistence.enabled=true \
+#   --set primary.persistence.size=8Gi
+
+# Install Kafka
+# helm install kafka bitnami/kafka \
+#   --set replicaCount=1 \
+#   --set zookeeper.replicaCount=1 \
+#   --set service.port=9092
