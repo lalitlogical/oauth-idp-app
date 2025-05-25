@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth-client-kafka-consumer-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth-client-kafka-consumer-app
+  template:
+    metadata:
+      labels:
+        app: oauth-client-kafka-consumer-app
+    spec:
+      containers:
+        - name: oauth-client-kafka-consumer-app
+          image: oauth-client-app:local
+          command: ["bundle", "exec", "rake", "kafka:consume"]
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: client-app-secrets
