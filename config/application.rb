@@ -28,5 +28,16 @@ module OauthIdpApp
     config.hosts << "accounts.lalit.local"
     config.hosts << "host.docker.internal:3000"
     config.hosts << "oauth-idp-service"
+
+    config.log_formatter = ::Logger::Formatter.new
+    config.logger = ActiveSupport::Logger.new($stdout)
+    config.logger.formatter = proc do |severity, timestamp, progname, msg|
+      JSON.dump({
+        severity: severity,
+        time: timestamp.utc.iso8601,
+        progname: progname,
+        message: msg
+      }) + "\n"
+    end
   end
 end
