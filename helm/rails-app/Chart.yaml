@@ -29,14 +29,14 @@ appVersion: "1.0"
 #   --set controller.progressDeadlineSeconds=60
 
 # Installation Commands
-# helm install oauth-client helm/rails-app -f helm/rails-app/values-client.yaml
-# helm upgrade oauth-client helm/rails-app -f helm/rails-app/values-client.yaml
+# helm install oauth-client helm/rails-app -f helm/values/values-client.yaml --namespace oauth-apps
+# helm upgrade oauth-client helm/rails-app -f helm/values/values-client.yaml --namespace oauth-apps
 # 
-# helm install oauth-idp helm/rails-app -f helm/rails-app/values-idp.yaml
-# helm upgrade oauth-idp helm/rails-app -f helm/rails-app/values-idp.yaml
+# helm install oauth-idp helm/rails-app -f helm/values/values-idp.yaml --namespace oauth-apps
+# helm upgrade oauth-idp helm/rails-app -f helm/values/values-idp.yaml --namespace oauth-apps
 # 
-# helm install oauth-client-kafka-consumer helm/rails-app -f helm/rails-app/values-client-kafka-consumer.yaml
-# helm upgrade oauth-client-kafka-consumer helm/rails-app -f helm/rails-app/values-client-kafka-consumer.yaml
+# helm install oauth-client-kafka-consumer helm/rails-app -f helm/values/values-client-kafka-consumer.yaml --namespace oauth-apps
+# helm upgrade oauth-client-kafka-consumer helm/rails-app -f helm/values/values-client-kafka-consumer.yaml --namespace oauth-apps
 
 # Useful Debug commands
 # kubectl port-forward svc/oauth-client-app-service 3001:80

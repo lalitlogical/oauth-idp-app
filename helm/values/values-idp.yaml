@@ -7,11 +7,11 @@ app:
   containerPort: 3000
   env:
     RAILS_ENV: development
-    KAFKA_BROKERS: kafka.default.svc.cluster.local:9092
+    KAFKA_BROKERS: kafka.services.svc.cluster.local:9092
     DB_DATABASE: oauth_idp
     IDP_HOST: http://accounts.lalit.local
   secrets:
-    DB_HOST: pgsql-postgresql.default.svc.cluster.local
+    DB_HOST: postgresql.services.svc.cluster.local
     DB_USERNAME: postgres
     DB_PASSWORD: postgres
     SECRET_KEY_BASE: "d8ae48416de4443183a5098491447365d3ade6da604d97ba69c33bb285d50a323f1281ede2f565f7c6b49ad87791d2038090b12c9f9f6eb5eede9f2db4077cf5"

@@ -20,7 +20,7 @@ Rails.logger.info "User created with ID: #{user.id}"
 
 # ✅ OIDC Interactive App (User Login)
 application = Doorkeeper::Application.find_or_create_by!(name: "Web Frontend App") do |application|
-  application.redirect_uri = "http://localhost:3001/oauth/callback http://client.myapp.local/oauth/callback http://client.lalit.local/oauth/callback"
+  application.redirect_uri = "http://localhost:3001/oauth/callback http://client.myapp.local/oauth/callback http://client.lalit.local/oauth/callback https://client.lalit.local/oauth/callback"
   application.scopes = "openid profile email records"
   application.confidential = false
   application.uid = 'web-frontend-app-client-id'

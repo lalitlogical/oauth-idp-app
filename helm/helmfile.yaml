@@ -17,8 +17,8 @@ releases:
           minReadySeconds: 10
           progressDeadlineSeconds: 60
 
-  - name: pgsql
-    namespace: default
+  - name: postgresql
+    namespace: services
     chart: bitnami/postgresql
     version: 16.7.4
     values:
@@ -34,7 +34,7 @@ releases:
             port: 5432
 
   - name: kafka
-    namespace: default
+    namespace: services
     chart: bitnami/kafka
     version: 26.8.2
     values:
@@ -57,20 +57,22 @@ releases:
 
   - name: oauth-client
     chart: ./rails-app
-    namespace: default
+    namespace: oauth-apps
     values:
       - values/values-client.yaml
   
-  - name: values-client-kafka-consumer
+  - name: oauth-client-kafka
     chart: ./rails-app
-    namespace: default
+    namespace: oauth-apps
     values:
-      - values/values-client-kafka-consumer.yaml
+      - values/values-client-kafka.yaml
 
   - name: oauth-idp
     chart: ./rails-app
-    namespace: default
+    namespace: oauth-apps
     values:
       - values/values-idp.yaml
 
-  
+  - name: tls-secret
+    chart: ./tls-secret
+    namespace: oauth-apps

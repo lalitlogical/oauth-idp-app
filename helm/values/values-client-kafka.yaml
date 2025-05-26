@@ -1,5 +1,5 @@
 app:
-  name: oauth-client-kafka-consumer
+  name: oauth-client-kafka
   replicas: 1
   image:
     repository: oauth-client-app
@@ -7,12 +7,12 @@ app:
   command: ["bundle", "exec", "rake", "kafka:consume"]
   env:
     RAILS_ENV: development
-    KAFKA_BROKERS: kafka.default.svc.cluster.local:9092
+    KAFKA_BROKERS: kafka.services.svc.cluster.local:9092
     DB_DATABASE: oauth_client
     OAUTH_HOST: http://accounts.lalit.local
     BACKEND_OAUTH_HOST: http://oauth-idp-app-service
   secrets:
-    DB_HOST: pgsql-postgresql.default.svc.cluster.local
+    DB_HOST: postgresql.services.svc.cluster.local
     DB_USERNAME: postgres
     DB_PASSWORD: postgres
     OAUTH_CLIENT_ID: web-frontend-app-client-id

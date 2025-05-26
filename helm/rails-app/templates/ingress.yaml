@@ -5,8 +5,14 @@ metadata:
   name: {{ .Values.app.name }}-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.app.ingress.host }}
+      secretName: lalit-local-tls
   rules:
     - host: {{ .Values.app.ingress.host }}
       http:
