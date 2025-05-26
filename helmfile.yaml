@@ -1,0 +1,62 @@
+# Install below plugin first before using helmfile apply --debug
+# helm plugin install https://github.com/databus23/helm-diff
+
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+
+releases:
+  - name: ingress-nginx
+    namespace: ingress-nginx
+    chart: ingress-nginx/ingress-nginx
+    version: 4.10.0
+    values:
+      - controller:
+          ingressClass: nginx
+          ingressClassResource:
+            default: true
+          service:
+            type: NodePort
+            nodePorts:
+              http: 30080
+              https: 30443
+
+  - name: postgres
+    namespace: default
+    chart: bitnami/postgresql
+    version: 12.1.5
+    values:
+      - auth:
+          username: postgres
+          password: postgres
+          database: oauth_client_development
+        primary:
+          persistence:
+            enabled: true
+            size: 8Gi
+          service:
+            port: 5432
+
+  - name: kafka
+    namespace: default
+    chart: bitnami/kafka
+    version: 26.8.2
+    values:
+      - kraft:
+          enabled: false
+        zookeeper:
+          enabled: true
+          replicaCount: 1
+        controller:
+          replicaCount: 0
+        broker:
+          replicaCount: 1
+        listeners:
+          client:
+            protocol: PLAINTEXT
+        auth:
+          enabled: false
+        service:
+          port: 9092
