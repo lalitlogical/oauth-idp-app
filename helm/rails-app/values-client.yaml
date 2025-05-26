@@ -21,3 +21,5 @@ app:
   ingress:
     enabled: true
     host: client.lalit.local
+  dbMigrate:
+    enabled: true

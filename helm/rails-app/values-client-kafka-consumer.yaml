@@ -20,3 +20,5 @@ app:
     SECRET_KEY_BASE: "18ccca5a73c3ba1972644be68639dc5ed06e2dc62ceae5fd01170a63ac7df8f87a7224b098dee1c971d25089174d7e711c6f6c7ba0a14592129c4cea472d3d84"
   ingress:
     enabled: false
+  dbMigrate:
+    enabled: false

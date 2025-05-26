@@ -1,0 +1,23 @@
+{{- if .Values.app.dbMigrate.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.app.name }}-migrate
+  labels:
+    app: {{ .Values.app.name }}
+spec:
+  template:
+    metadata:
+      name: {{ .Values.app.name }}-migrate
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+          command: ["bundle", "exec", "rails", "db:create", "db:migrate", "db:seed"]
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.app.name }}-config
+            - secretRef:
+                name: {{ .Values.app.name }}-secrets
+{{- end }}
