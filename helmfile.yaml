@@ -11,27 +11,27 @@ releases:
   - name: ingress-nginx
     namespace: ingress-nginx
     chart: ingress-nginx/ingress-nginx
-    version: 4.10.0
+    version: 4.12.2
     values:
       - controller:
           minReadySeconds: 10
           progressDeadlineSeconds: 60
 
-  # - name: pgsql
-  #   namespace: default
-  #   chart: bitnami/postgresql
-  #   version: 12.1.5
-  #   values:
-  #     - auth:
-  #         username: postgres
-  #         password: postgres@1234
-  #         database: oauth_client_development
-  #       primary:
-  #         persistence:
-  #           enabled: true
-  #           size: 8Gi
-  #         service:
-  #           port: 5432
+  - name: pgsql
+    namespace: default
+    chart: bitnami/postgresql
+    version: 16.7.4
+    values:
+      - auth:
+          username: postgres
+          password: postgres
+          database: oauth_client_development
+        primary:
+          persistence:
+            enabled: true
+            size: 8Gi
+          service:
+            port: 5432
 
   - name: kafka
     namespace: default
