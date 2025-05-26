@@ -14,14 +14,8 @@ releases:
     version: 4.10.0
     values:
       - controller:
-          ingressClass: nginx
-          ingressClassResource:
-            default: true
-          service:
-            type: NodePort
-            nodePorts:
-              http: 30080
-              https: 30443
+          minReadySeconds: 10
+          progressDeadlineSeconds: 60
 
   # - name: pgsql
   #   namespace: default
