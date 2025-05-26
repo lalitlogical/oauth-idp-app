@@ -17,5 +17,27 @@ appVersion: "1.0"
 # Install Kafka
 # helm install kafka bitnami/kafka \
 #   --set replicaCount=1 \
-#   --set zookeeper.replicaCount=1 \
+#   --set zookeeper.enabled=true \
+#   --set kraft.enabled=false \
+#   --set auth.enabled=false \
+#   --set listeners.client.protocol=PLAINTEXT \
 #   --set service.port=9092
+
+# Install Nginx
+# helm install nginx ingress-nginx/ingress-nginx \
+#   --set controller.minReadySeconds=10 \
+#   --set controller.progressDeadlineSeconds=60
+
+# Installation Commands
+# helm install oauth-client helm/rails-app -f helm/rails-app/values-client.yaml
+# helm upgrade oauth-client helm/rails-app -f helm/rails-app/values-client.yaml
+# 
+# helm install oauth-idp helm/rails-app -f helm/rails-app/values-idp.yaml
+# helm upgrade oauth-idp helm/rails-app -f helm/rails-app/values-idp.yaml
+# 
+# helm install oauth-client-kafka-consumer helm/rails-app -f helm/rails-app/values-client-kafka-consumer.yaml
+# helm upgrade oauth-client-kafka-consumer helm/rails-app -f helm/rails-app/values-client-kafka-consumer.yaml
+
+# Useful Debug commands
+# kubectl port-forward svc/oauth-client-app-service 3001:80
+# kubectl port-forward svc/oauth-idp-app-service 3001:80

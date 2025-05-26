@@ -16,7 +16,7 @@ user = User.find_or_create_by(email: 'lalit.logical@gmail.com') do |user|
   user.admin = true
 end
 
-puts "User created with ID: #{user.id}"
+Rails.logger.info "User created with ID: #{user.id}"
 
 # ✅ OIDC Interactive App (User Login)
 application = Doorkeeper::Application.find_or_create_by!(name: "Web Frontend App") do |application|
@@ -27,7 +27,7 @@ application = Doorkeeper::Application.find_or_create_by!(name: "Web Frontend App
   application.secret = 'web-frontend-app-client-secret'
 end
 
-puts "Doorkeeper::Application Web Frontend App created with ID: #{application.id}"
+Rails.logger.info "Doorkeeper::Application Web Frontend App created with ID: #{application.id}"
 
 # ✅ Machine-to-Machine App (No User, Just Token)
 application = Doorkeeper::Application.find_or_create_by!(name: "Internal API Client") do |application|
@@ -37,4 +37,4 @@ application = Doorkeeper::Application.find_or_create_by!(name: "Internal API Cli
   application.secret = 'api-client-secret'
 end
 
-puts "Doorkeeper::Application Internal API Client created with ID: #{application.id}"
+Rails.logger.info "Doorkeeper::Application Internal API Client created with ID: #{application.id}"

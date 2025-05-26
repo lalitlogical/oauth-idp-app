@@ -2,7 +2,7 @@ app:
   name: oauth-client-kafka-consumer
   replicas: 1
   image:
-    repository: oauth-idp-app
+    repository: oauth-client-app
     tag: local
   command: ["bundle", "exec", "rake", "kafka:consume"]
   env:
