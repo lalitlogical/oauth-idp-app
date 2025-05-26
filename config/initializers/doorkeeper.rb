@@ -467,7 +467,11 @@ Doorkeeper.configure do
   # so that the user skips the authorization step.
   # For example if dealing with a trusted application.
   skip_authorization do |resource_owner, client|
-    client.confidential
+    client.confidential || resource_owner && Doorkeeper::AccessToken.exists?(
+      resource_owner_id: resource_owner.id,
+      application_id: client.id,
+      revoked_at: nil
+    )
   end
 
   # Configure custom constraints for the Token Introspection request.
