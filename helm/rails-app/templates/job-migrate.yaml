@@ -5,7 +5,12 @@ metadata:
   name: {{ .Values.app.name }}-migrate
   labels:
     app: {{ .Values.app.name }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
 spec:
+  ttlSecondsAfterFinished: 120
+  backoffLimit: 5
   template:
     metadata:
       name: {{ .Values.app.name }}-migrate
