@@ -54,3 +54,23 @@ releases:
           enabled: false
         service:
           port: 9092
+
+  - name: oauth-client
+    chart: ./rails-app
+    namespace: default
+    values:
+      - values/values-client.yaml
+  
+  - name: values-client-kafka-consumer
+    chart: ./rails-app
+    namespace: default
+    values:
+      - values/values-client-kafka-consumer.yaml
+
+  - name: oauth-idp
+    chart: ./rails-app
+    namespace: default
+    values:
+      - values/values-idp.yaml
+
+  
