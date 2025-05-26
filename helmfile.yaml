@@ -23,21 +23,21 @@ releases:
               http: 30080
               https: 30443
 
-  - name: postgres
-    namespace: default
-    chart: bitnami/postgresql
-    version: 12.1.5
-    values:
-      - auth:
-          username: postgres
-          password: postgres
-          database: oauth_client_development
-        primary:
-          persistence:
-            enabled: true
-            size: 8Gi
-          service:
-            port: 5432
+  # - name: pgsql
+  #   namespace: default
+  #   chart: bitnami/postgresql
+  #   version: 12.1.5
+  #   values:
+  #     - auth:
+  #         username: postgres
+  #         password: postgres@1234
+  #         database: oauth_client_development
+  #       primary:
+  #         persistence:
+  #           enabled: true
+  #           size: 8Gi
+  #         service:
+  #           port: 5432
 
   - name: kafka
     namespace: default
