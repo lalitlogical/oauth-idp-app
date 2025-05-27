@@ -1,6 +1,16 @@
 # Install below plugin first before using helmfile apply --debug
 # helm plugin install https://github.com/databus23/helm-diff
 
+# Useful commands
+# helmfile -l name=oauth-idp apply -f helm/helmfile.yaml 
+# helmfile -l name=oauth-client apply -f helm/helmfile.yaml
+# helmfile -l name=oauth-client-kafka apply -f helm/helmfile.yaml
+
+# Restart services
+# kubectl rollout restart deployment oauth-idp-app -n oauth-apps
+# kubectl rollout restart deployment oauth-client-app -n oauth-apps
+# kubectl rollout restart deployment oauth-client-kafka-app -n oauth-apps
+
 repositories:
   - name: bitnami
     url: https://charts.bitnami.com/bitnami

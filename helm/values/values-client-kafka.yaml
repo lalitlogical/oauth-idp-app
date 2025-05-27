@@ -1,5 +1,5 @@
 app:
-  name: oauth-client-kafka
+  name: oauth-client-kafka-app
   replicas: 2
   image:
     repository: oauth-client-app
