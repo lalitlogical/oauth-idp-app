@@ -9,7 +9,7 @@ app:
     RAILS_ENV: development
     KAFKA_BROKERS: kafka.services.svc.cluster.local:9092
     DB_DATABASE: oauth_idp
-    IDP_HOST: http://accounts.lalit.local
+    IDP_HOST: https://accounts.lalit.local
   secrets:
     DB_HOST: postgresql.services.svc.cluster.local
     DB_USERNAME: postgres
