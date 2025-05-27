@@ -27,8 +27,15 @@ class Admin::ApplicationsController < Admin::BaseController
   end
 
   def update
+    cleaned_params = app_params.dup
+
+    # Don't overwrite secret if left blank
+    if cleaned_params[:secret].blank?
+      cleaned_params.delete(:secret)
+    end
+
     @application = Doorkeeper::Application.find(params[:id])
-    if @application.update(app_params)
+    if @application.update(cleaned_params)
       redirect_to admin_applications_path, notice: "OAuth Application was successfully updated."
     else
       render :edit
@@ -43,6 +50,6 @@ class Admin::ApplicationsController < Admin::BaseController
   private
 
   def app_params
-    params.require(:doorkeeper_application).permit(:name, :redirect_uri, :scopes, :confidential)
+    params.require(:doorkeeper_application).permit(:name, :uid, :secret, :redirect_uri, :scopes, :confidential)
   end
 end

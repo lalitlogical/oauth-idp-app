@@ -30,6 +30,25 @@
         </div>
 
         <div class="mb-3">
+          <%= f.label :uid, 'Client ID', class: 'form-label fw-semibold' %>
+          <%= f.text_field :uid, class: "form-control", placeholder: "Leave blank to auto-generate" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :secret, 'Client Secret', class: 'form-label fw-semibold' %>
+          <%= f.password_field :secret, class: "form-control", placeholder: "Leave blank to auto-generate or unchanged" %>
+          <% if @application.persisted? %>
+            <div class="form-text text-muted">
+              Leave blank to remain unchanged. To reset, enter a new value or delete the application.
+            </div>
+          <% else %>
+            <div class="form-text text-muted">
+              Leave blank to auto-generate
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mb-3">
           <%= f.label :redirect_uri, 'Redirect URI', class: 'form-label fw-semibold' %>
           <%= f.text_field :redirect_uri, class: 'form-control', placeholder: "e.g. https://myapp.com/oauth/callback" %>
           <div class="form-text">OAuth server will redirect here after authentication.</div>
