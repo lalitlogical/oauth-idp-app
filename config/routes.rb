@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper_openid_connect
   use_doorkeeper
   devise_for :users
 
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
     get "/jwks", to: "jwks#show"
   end
 
-  get "/.well-known/openid-configuration", to: "well_known#openid_configuration"
+  # get "/.well-known/openid-configuration", to: "well_known#openid_configuration"
   get "/token/validate", to: "token_validations#show"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
