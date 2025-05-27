@@ -30,15 +30,15 @@ module OauthIdpApp
     config.hosts << "oauth-idp-service"
     config.hosts << "oauth-idp-app-service"
 
-    config.log_formatter = ::Logger::Formatter.new
-    config.logger = ActiveSupport::Logger.new($stdout)
-    config.logger.formatter = proc do |severity, timestamp, progname, msg|
-      JSON.dump({
-        severity: severity,
-        time: timestamp.utc.iso8601,
-        progname: progname,
-        message: msg
-      }) + "\n"
-    end
+    # config.log_formatter = ::Logger::Formatter.new
+    # config.logger = ActiveSupport::Logger.new($stdout)
+    # config.logger.formatter = proc do |severity, timestamp, progname, msg|
+    #   JSON.dump({
+    #     severity: severity,
+    #     time: timestamp.utc.iso8601,
+    #     progname: progname,
+    #     message: msg
+    #   }) + "\n"
+    # end
   end
 end

@@ -1,4 +1,6 @@
 class WellKnownController < ApplicationController
+  skip_before_action :authenticate_user!
+  
   def openid_configuration
     issuer = ENV["IDP_HOST"]
 
