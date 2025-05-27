@@ -46,7 +46,7 @@ releases:
         controller:
           replicaCount: 0
         broker:
-          replicaCount: 1
+          replicaCount: 3
         listeners:
           client:
             protocol: PLAINTEXT
