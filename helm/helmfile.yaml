@@ -65,6 +65,27 @@ releases:
         service:
           port: 9092
 
+  - name: keycloak
+    namespace: oauth-apps
+    chart: bitnami/keycloak
+    version: 21.2.1
+    values:
+      - auth:
+          adminUser: admin
+          adminPassword: admin
+        replicaCount: 1
+        resources:
+          requests:
+            memory: 3Gi
+            cpu: 500m
+          limits:
+            memory: 3Gi
+            cpu: 1000m
+        service:
+          type: ClusterIP
+        ingress:
+          enabled: false
+          
   - name: oauth-client
     chart: ./rails-app
     namespace: oauth-apps
