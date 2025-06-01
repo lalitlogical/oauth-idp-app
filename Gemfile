@@ -42,7 +42,7 @@ gem "thruster", require: false
 
 gem "doorkeeper"
 gem "doorkeeper-jwt"
-gem 'doorkeeper-openid_connect'
+gem "doorkeeper-openid_connect"
 gem "jwt"
 gem "devise"
 gem "rails_admin", "~> 3.1"
