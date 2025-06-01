@@ -1,6 +1,6 @@
 app:
   name: oauth-client-app
-  replicas: 2
+  replicas: 1
   image:
     repository: oauth-client-app
     tag: local
