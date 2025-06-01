@@ -75,6 +75,30 @@ releases:
     values:
       - values/values-idp.yaml
 
+  - name: oauth-audit
+    chart: ./rails-app
+    namespace: oauth-apps
+    values:
+      - values/values-audit.yaml
+  
+  - name: oauth-audit-kafka
+    chart: ./rails-app
+    namespace: oauth-apps
+    values:
+      - values/values-audit-kafka.yaml
+
+  - name: oauth-notification
+    chart: ./rails-app
+    namespace: oauth-apps
+    values:
+      - values/values-notification.yaml
+  
+  - name: oauth-notification-kafka
+    chart: ./rails-app
+    namespace: oauth-apps
+    values:
+      - values/values-notification-kafka.yaml
+
   - name: tls-secret
     chart: ./tls-secret
     namespace: oauth-apps

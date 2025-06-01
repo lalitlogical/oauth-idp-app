@@ -1,24 +1,21 @@
 app:
-  name: oauth-client-kafka-consumer
-  replicas: 2
+  name: oauth-audit-app
+  replicas: 1
   image:
-    repository: oauth-client-app
+    repository: oauth-audit-app
     tag: local
-  command: ["bundle", "exec", "rake", "kafka:consume"]
+  containerPort: 3000
   env:
     RAILS_ENV: development
     KAFKA_BROKERS: kafka.services.svc.cluster.local:9092
-    DB_DATABASE: oauth_client
-    OAUTH_HOST: https://accounts.lalit.local
-    BACKEND_OAUTH_HOST: http://oauth-idp-app-service
+    DB_DATABASE: oauth_audit
   secrets:
     DB_HOST: postgresql.services.svc.cluster.local
     DB_USERNAME: postgres
     DB_PASSWORD: postgres
-    OAUTH_CLIENT_ID: web-frontend-app-client-id
-    OAUTH_CLIENT_SECRET: web-frontend-app-client-secret
     SECRET_KEY_BASE: "18ccca5a73c3ba1972644be68639dc5ed06e2dc62ceae5fd01170a63ac7df8f87a7224b098dee1c971d25089174d7e711c6f6c7ba0a14592129c4cea472d3d84"
   ingress:
-    enabled: false
+    enabled: true
+    host: audit.lalit.local
   dbMigrate:
-    enabled: false
+    enabled: true
