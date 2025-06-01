@@ -19,18 +19,58 @@ class User < ApplicationRecord
     active? ? super : :inactive_account
   end
 
-  after_commit :user_deactivated, if: -> { saved_change_to_active? }
+  after_commit :publish_user_events, on: [ :update ]
 
   private
 
-  def user_deactivated
-    event = active ? "user.activated" : "user.deactivated"
-    Rails.logger.info "Event #{event} raised for email #{email}."
-    KafkaProducer.new.publish(event, {
+  def publish_user_events
+    return if saved_changes.blank?
+
+    if saved_change_to_active?
+      event = active ? "user.activated" : "user.deactivated"
+      publish_kafka_event(event)
+    end
+
+    if saved_change_to_email?
+      publish_kafka_event("user.email_changed", {
+        previous_email: saved_change_to_email.first,
+        new_email: email
+      })
+    end
+
+    if saved_change_to_name?
+      publish_kafka_event("user.name_changed", {
+        previous_name: saved_change_to_name.first,
+        new_name: name
+      })
+    end
+
+    if saved_change_to_username?
+      publish_kafka_event("user.username_changed", {
+        previous_username: saved_change_to_username.first,
+        new_username: username
+      })
+    end
+
+    if saved_change_to_display_name?
+      publish_kafka_event("user.display_name_changed", {
+        previous_display_name: saved_change_to_display_name.first,
+        new_display_name: display_name
+      })
+    end
+
+    # Add more conditions if needed
+  end
+
+  def publish_kafka_event(event_name, extra_payload = {})
+    payload = {
       user_id: id,
       email: email,
-      name: name,
+      name: display_name || name,
       active: active
-    })
+    }.merge(extra_payload)
+
+    Rails.logger.info "Event #{event_name} raised for #{email}."
+    KafkaProducer.new.publish(event_name, payload)
   end
 end
