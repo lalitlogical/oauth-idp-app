@@ -19,9 +19,14 @@ class User < ApplicationRecord
     active? ? super : :inactive_account
   end
 
+  after_create_commit :publish_user_created_event
   after_commit :publish_user_events, on: [ :update ]
 
   private
+
+  def publish_user_created_event
+    publish_kafka_event("user.created")
+  end
 
   def publish_user_events
     return if saved_changes.blank?
@@ -67,7 +72,8 @@ class User < ApplicationRecord
       user_id: id,
       email: email,
       name: display_name || name,
-      active: active
+      active: active,
+      timestamp: Time.current
     }.merge(extra_payload)
 
     Rails.logger.info "Event #{event_name} raised for #{email}."
