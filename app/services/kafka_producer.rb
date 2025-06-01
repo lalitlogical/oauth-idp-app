@@ -8,7 +8,7 @@ class KafkaProducer
   end
 
   def publish(event, payload)
-    message = { event: event, payload: payload, timestamp: Time.now.to_s }.to_json
+    message = { event: event, producer_service: "idp_app", payload: payload, timestamp: Time.now.to_s }.to_json
     @kafka.deliver_message(message, topic: @topic)
   end
 end
