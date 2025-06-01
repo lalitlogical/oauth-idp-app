@@ -1,0 +1,11 @@
+auth:
+  username: postgres
+  password: postgres
+  database: oauth_client_development
+  
+primary:
+  persistence:
+    enabled: true
+    size: 8Gi
+  service:
+    port: 5432

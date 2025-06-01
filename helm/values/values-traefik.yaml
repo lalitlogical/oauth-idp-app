@@ -1,0 +1,16 @@
+dashboard:
+  enabled: true
+
+api:
+  dashboard: true
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+  name: traefik
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"

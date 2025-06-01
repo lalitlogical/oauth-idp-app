@@ -34,78 +34,28 @@ releases:
     createNamespace: true
     chart: traefik/traefik
     values:
-      - dashboard:
-          enabled: true
-        api:
-          dashboard: true
-        ingressClass:
-          enabled: true
-          isDefaultClass: true
-          name: traefik
-        entryPoints:
-          web:
-            address: ":80"
-          websecure:
-            address: ":443"
+      - values/values-traefik.yaml
 
   - name: postgresql
     namespace: services
     chart: bitnami/postgresql
     version: 16.7.4
     values:
-      - auth:
-          username: postgres
-          password: postgres
-          database: oauth_client_development
-        primary:
-          persistence:
-            enabled: true
-            size: 8Gi
-          service:
-            port: 5432
+      - values/values-postgresql.yaml
 
   - name: kafka
     namespace: services
     chart: bitnami/kafka
     version: 26.8.2
     values:
-      - kraft:
-          enabled: false
-        zookeeper:
-          enabled: true
-          replicaCount: 1
-        controller:
-          replicaCount: 0
-        broker:
-          replicaCount: 3
-        listeners:
-          client:
-            protocol: PLAINTEXT
-        auth:
-          enabled: false
-        service:
-          port: 9092
+      - values/values-kafka.yaml
 
   - name: keycloak
-    namespace: oauth-apps
+    namespace: services
     chart: bitnami/keycloak
     version: 21.2.1
     values:
-      - auth:
-          adminUser: admin
-          adminPassword: admin
-        replicaCount: 1
-        resources:
-          requests:
-            memory: 3Gi
-            cpu: 500m
-          limits:
-            memory: 3Gi
-            cpu: 1000m
-        service:
-          type: ClusterIP
-        ingress:
-          enabled: false
+      - values/values-keycloak.yaml
           
   - name: oauth-client
     chart: ./rails-app

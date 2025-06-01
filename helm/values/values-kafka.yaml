@@ -1,0 +1,52 @@
+kraft:
+  enabled: false
+
+zookeeper:
+  enabled: true
+  replicaCount: 1
+
+controller:
+  replicaCount: 0
+
+broker:
+  replicaCount: 3
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+  external:
+    enabled: true
+    protocol: PLAINTEXT
+
+externalAccess:
+  enabled: false
+  service:
+    type: NodePort
+    port: 9094
+  autoDiscovery:
+    enabled: false
+  nodePorts:
+    - 30904
+    - 30905
+    - 30906
+  hosts:
+    - localhost
+    - localhost
+    - localhost
+
+auth:
+  enabled: true
+  interBrokerPassword: "${INTER_BROKER_PASSWORD}"
+
+sasl:
+  interbroker:
+    password: "${INTER_BROKER_PASSWORD}"
+  controller:
+    password: "${INTER_BROKER_PASSWORD}"
+
+service:
+  port: 9092
+
+extraEnvVars:
+  - name: EXTERNAL_ACCESS_HOST_USE_PUBLIC_IP
+    value: "false"
