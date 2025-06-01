@@ -24,8 +24,9 @@ class User < ApplicationRecord
   private
 
   def user_deactivated
-    Rails.logger.info "User active state for email #{email} is #{active}."
-    KafkaProducer.new.publish("user_active_state", {
+    event = active ? "user.activated" : "user.deactivated"
+    Rails.logger.info "Event #{event} raised for email #{email}."
+    KafkaProducer.new.publish(event, {
       user_id: id,
       email: email,
       active: active
