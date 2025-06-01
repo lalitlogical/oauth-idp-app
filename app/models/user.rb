@@ -29,6 +29,7 @@ class User < ApplicationRecord
     KafkaProducer.new.publish(event, {
       user_id: id,
       email: email,
+      name: name,
       active: active
     })
   end
