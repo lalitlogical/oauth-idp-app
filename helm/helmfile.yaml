@@ -10,9 +10,14 @@
 
 # Restart services
 # kubectl rollout restart deployment oauth-idp-app -n oauth-apps
+
 # kubectl rollout restart deployment oauth-client-app -n oauth-apps
 # kubectl rollout restart deployment oauth-client-kafka-consumer -n oauth-apps
+
+# kubectl rollout restart deployment oauth-audit-app -n oauth-apps
 # kubectl rollout restart deployment oauth-audit-kafka-consumer -n oauth-apps
+
+# kubectl rollout restart deployment oauth-notification-app -n oauth-apps
 # kubectl rollout restart deployment oauth-notification-kafka-consumer -n oauth-apps
 
 repositories:
