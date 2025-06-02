@@ -24,7 +24,14 @@ class Admin::UsersController < Admin::BaseController
   def edit; end
 
   def update
-    if @user.update(user_params)
+    cleaned_params = user_params.dup
+
+    # Don't overwrite secret if left blank
+    if cleaned_params[:password].blank?
+      cleaned_params.delete(:password)
+    end
+
+    if @user.update(cleaned_params)
       redirect_to admin_users_path, notice: "User updated."
     else
       render :edit
