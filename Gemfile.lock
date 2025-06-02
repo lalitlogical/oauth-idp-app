@@ -91,6 +91,9 @@ GEM
       msgpack (~> 1.2)
     bootstrap (5.3.5)
       popper_js (>= 2.11.8, < 3)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     brakeman (7.0.2)
       racc
     builder (3.3.0)
@@ -443,6 +446,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3)
+  bootstrap5-kaminari-views
   brakeman
   byebug
   capybara
@@ -458,6 +462,7 @@ DEPENDENCIES
   jbuilder
   jwt
   kamal
+  kaminari
   pg (>= 1.1)
   puma (>= 5.0)
   rails (~> 8.0.2)

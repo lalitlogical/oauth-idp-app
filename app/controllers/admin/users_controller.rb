@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::BaseController
   layout "admin" # use a custom layout
 
   def index
-    @users = User.order(created_at: :desc).page(params[:page])
+    @users = User.search(params[:search]).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show; end

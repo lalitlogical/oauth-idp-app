@@ -22,6 +22,14 @@ class User < ApplicationRecord
   after_create_commit :publish_user_created_event
   after_commit :publish_user_events, on: [ :update ]
 
+  def self.search(term)
+    if term.present?
+      where("name ilike :term OR display_name ilike :term OR email ilike :term", { term: "%#{term}%" })
+    else
+      all
+    end
+  end
+
   private
 
   def publish_user_created_event

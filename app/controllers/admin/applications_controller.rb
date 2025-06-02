@@ -2,7 +2,7 @@ class Admin::ApplicationsController < Admin::BaseController
   layout "admin"
 
   def index
-    @applications = Doorkeeper::Application.all
+    @applications = Doorkeeper::Application.search(params[:search]).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def new
