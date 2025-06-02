@@ -18,6 +18,18 @@ end
 
 Rails.logger.info "User created with ID: #{user.id}"
 
+# Create 10 random users
+100.times do
+  name = Faker::Name.name
+  User.create(
+    name: name,
+    display_name: name.split.first,
+    email: Faker::Internet.unique.email(name: name),
+    password: 'password123',
+    admin: false
+  )
+end
+
 # ✅ OIDC Interactive App (User Login)
 application = Doorkeeper::Application.find_or_create_by!(name: "Web Frontend App") do |application|
   application.redirect_uri = "http://localhost:3001/oauth/callback http://client.myapp.local/oauth/callback http://client.lalit.local/oauth/callback https://client.lalit.local/oauth/callback"
