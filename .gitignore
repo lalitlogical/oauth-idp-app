@@ -39,3 +39,31 @@
 /node_modules
 .byebug*
 .keep
+
+# Local .terraform directories
+**/.terraform/*
+!.terraform/*.tfstate
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Ignore override files (used for local-only changes)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform plan output
+*.tfplan
+
+# Sensitive variable definition files
+terraform.tfvars
+*.tfvars
+
+# CLI configuration files
+.terraformrc
+terraform.rc
