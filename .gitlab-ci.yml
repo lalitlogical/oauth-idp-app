@@ -8,7 +8,16 @@ mirror_to_github:
     - apk add --no-cache git
     - git config --global user.email "lalit.logical@gmail.com"
     - git config --global user.name "Lalit Kumar Maurya"
+
+    # Add GitHub remote
     - git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_USERNAME/$CI_PROJECT_NAME.git
+    
+    # Fetch all branches and tags
+    - git fetch origin --prune --unshallow
+    - git fetch --all
+    - git fetch --tags
+
+    # Push only branches and tags (not internal refs)
     - git push --prune github --all
     - git push github --tags
   rules:
