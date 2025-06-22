@@ -8,6 +8,7 @@ mirror_to_github:
     - apk add --no-cache git
     - git config --global user.email "lalit.logical@gmail.com"
     - git config --global user.name "Lalit Kumar Maurya"
+    - echo "https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_USERNAME/$CI_PROJECT_NAME.git"
     - git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_USERNAME/$CI_PROJECT_NAME.git
     - git push --mirror github
   rules:
