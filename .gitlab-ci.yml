@@ -12,13 +12,15 @@ mirror_to_github:
     # Add GitHub remote
     - git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_USERNAME/$CI_PROJECT_NAME.git
     
-    # Fetch all branches and tags
-    - git fetch origin --prune --unshallow
-    - git fetch --all
-    - git fetch --tags
+    # Ensure we're not in a shallow clone and fetch all data
+    - git fetch --unshallow || true
+    - git fetch origin
 
-    # Push only branches and tags (not internal refs)
-    - git push --prune github --all
+    # Explicitly check out the main branch
+    - git checkout main
+
+    # Push only the main branch and tags
+    - git push github main
     - git push github --tags
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
