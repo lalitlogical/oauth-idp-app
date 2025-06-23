@@ -67,3 +67,24 @@ terraform.tfvars
 # CLI configuration files
 .terraformrc
 terraform.rc
+
+/helm/tls-secret/certs
+/*.crt
+/*.key
+
+/config/keys
+*.pem
+
+# --- Terraform ---
+*.tfstate
+*.tfstate.*
+.crash
+.terraform/
+.terraform.lock.hcl
+*.backup
+*.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+terraform.tfvars.json

@@ -99,6 +99,79 @@ rails server
 - Use .reuse_access_token to prevent duplicate token generation
 - Integrate with M2M services via JWT validation & scopes
 
+## 🔐 Regenerating Local HTTPS Certificates with mkcert
+
+This project uses self-signed HTTPS certificates for local development domains like `accounts.lalit.local` and `client.lalit.local`. These certificates are generated using [`mkcert`](https://github.com/FiloSottile/mkcert) and stored in the `helm/tls-secret/certs/` directory, which is **excluded from version control**.
+
+> ⚠️ These certs must be regenerated manually on each new machine and **should never be committed** to Git.
+
+---
+
+### 📦 Step 1: Install `mkcert`
+
+#### macOS
+
+```bash
+brew install mkcert
+mkcert -install
+```
+#### Ubuntu/Linux
+
+```bash
+sudo apt install libnss3-tools
+brew install mkcert  # Or use prebuilt binaries from the mkcert GitHub releases
+mkcert -install
+```
+
+### 🔧 Step 2: Generate Certificates for Required Domains
+
+```bash
+mkcert accounts.lalit.local client.lalit.local
+```
+
+This will generate:
+
+- `accounts.lalit.local+1.pem`
+- `accounts.lalit.local+1-key.pem`
+
+Rename and move them to the `helm/tls-secret/certs/` folder:
+
+```bash
+mkdir -p helm/tls-secret/certs
+
+mv accounts.lalit.local+1.pem helm/tls-secret/certs/lalit.local.crt
+mv accounts.lalit.local+1-key.pem helm/tls-secret/certs/lalit.local.key
+```
+
+### 🛡 Step 3: Helm-Managed TLS Secret
+
+This project uses a Helm chart (`tls-secret`) to automatically create the Kubernetes TLS secret named `lalit-local-tls`.
+
+Once you’ve generated the certs using `mkcert` and placed them in `helm/tls-secret/certs/`, **no manual `kubectl create secret` command is required**.
+
+The `Secret` is defined like this in the `tls-secret` chart:
+
+```yaml
+# helm/tls-secret/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lalit-local-tls
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ .Files.Get "certs/lalit.local.crt" | b64enc }}
+  tls.key: {{ .Files.Get "certs/lalit.local.key" | b64enc }}
+```
+
+### 🌍 Step 4: Update Local /etc/hosts File
+
+Edit your `/etc/hosts` to map domains to `127.0.0.1`:
+
+```lua
+127.0.0.1 accounts.lalit.local
+127.0.0.1 client.lalit.local
+```
+
 ## 📄 License
 
 MIT License — feel free to use and modify!
